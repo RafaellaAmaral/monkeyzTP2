@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="stylesBalao.css">
-    <title>Document</title>
-</head>
-<body>
-    <div id="mamaco"></div>
-</body>
-<script src="bibliotecas/jQuery.js"></script>
-<script src="balao.js"></script>
-</html>
+#mamaco {
+    position: absolute;
+    background-color: brown;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
