@@ -18,7 +18,6 @@ let isAlive = setInterval(() => {
 
     let plantaLeft = parseInt(window.getComputedStyle(planta).getPropertyValue("left"));
 
-    // analisar se ambos se tocam
     if (plantaLeft < 50 && plantaLeft > 0 && macacoTop >= 140){
         alert("Vixe, game over :(");
         document.body.innerHTML = '<h1 class="game-over""> Atualize a página e jogue novamente </h1>'; // criando título ao final do jogo
