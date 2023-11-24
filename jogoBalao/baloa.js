@@ -1,15 +1,4 @@
-let mamacoEl = document.querySelector('#mamaco');
-
-
-let mamaco = {
-    html: mamacoEl,
-    
-    acc: new Vetor(),
-
-    vel: new Vetor(),
-
-    pos: new Vetor()
-}
+let macacoEl = document.querySelector('#mamaco');
 
 class Vetor {
     constructor(x = 0, y = 0) {
@@ -20,48 +9,96 @@ class Vetor {
     soma(vetor) {
         return new Vetor(this.x + vetor.x, this.y + vetor.y);
     }
-    
+
     distancia(vetor) {
         return Math.hypot(this.x - vetor.x, this.y - vetor.y);
     }
 }
 
+let macaco = {
+    html: macacoEl,
+    height: macacoEl.clientHeight,
+    width: macacoEl.clientWidth,
+    vel: new Vetor(),
+    pos: new Vetor()
+};
 
+let teclasPressionadas = {
+    'w': false,
+    's': false,
+    'a': false,
+    'd': false
+};
 
-class Robo {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.acc = new Vector
+document.addEventListener('keydown', (event) => {
+    if (teclasPressionadas.hasOwnProperty(event.key.toLowerCase())) {
+        teclasPressionadas[event.key.toLowerCase()] = true;
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    if (teclasPressionadas.hasOwnProperty(event.key.toLowerCase())) {
+        teclasPressionadas[event.key.toLowerCase()] = false;
+    }
+});
+
+function atualizarPosicao() {
+    if (teclasPressionadas['w']) {
+        macaco.pos.y -= 3;
+        macaco.vel.y = -1;
+    }
+    if (teclasPressionadas['s']) {
+        macaco.pos.y += 3;
+        macaco.vel.y = 1;
+    }
+    if (teclasPressionadas['a']) {
+        macaco.pos.x -= 3;
+        macaco.vel.x = -1;
+    }
+    if (teclasPressionadas['d']) {
+        macaco.pos.x += 3;
+        macaco.vel.x = 1;
     }
 
-    irParaMacacoX(mamaco) {
-        const dist_atual = this.pos.distancia(mamaco.pos);
+    macaco.html.style.top = macaco.pos.y + 'px';
+    macaco.html.style.left = macaco.pos.x + 'px';
 
-        const dist_esquerda = this.pos.soma(new Vetor(-1)).distancia(mamaco.pos);
-        
-        const dist_direita = this.pos.soma(new Vetor(1)).distancia(mamaco.pos);
-
-        if (dist_direita < dist_atual) return new Vetor (1); 
-        if (dist_esquerda < dist_atual) return new Vector(-1);
-        return new Vetor ();
-    }
-
-    irParaMacacoY(mamaco) {
-        const dist_atual = this.pos.distancia(mamaco.pos);
-
-        const dist_baixo = this.pos.soma(new Vetor(0, -1)).distancia(mamaco.pos);
-        
-        const dist_cima = this.pos.soma(new Vetor(0, 1)).distancia(mamaco.pos);
-
-        if (dist_cima < dist_atual) return new Vetor (0, 1); 
-        if (dist_baixo < dist_atual) return new Vector(0, -1);
-        return new Vetor ();
-    }
-
-    let acc = new Vetor(0, 0),
-
-    let vel = new Vetor(0, 0),
-
-    let pos = new Vetor(0, 0)
+    requestAnimationFrame(atualizarPosicao);
 }
+
+function atirar() {
+    let tiroEl = document.createElement('div');
+    tiroEl.className = 'tiro';
+
+    tiroEl.style.top = (macaco.pos.y + (macaco.height / 2)) + 'px';
+    tiroEl.style.left = (macaco.pos.x + macaco.width) + 'px';
+
+    macaco.html.appendChild(tiroEl);
+
+
+    let direcaoTiro = new Vetor(macaco.vel.x, macaco.vel.y);
+    let velocidadeTiro = 3;
+    
+
+    let intervaloTiro = setInterval(() => {
+        tiroEl.pos = tiroEl.pos || { x: parseFloat(tiroEl.style.left) || 0, y: parseFloat(tiroEl.style.top) || 0 };
+        tiroEl.pos.x += direcaoTiro.x * velocidadeTiro;
+        tiroEl.pos.y += direcaoTiro.y * velocidadeTiro;
+        tiroEl.style.left = tiroEl.pos.x + 'px';
+        tiroEl.style.top = tiroEl.pos.y + 'px';
+    }, 20);
+
+    // Define um timeout para remover a div após 0.5 segundos
+    setTimeout(() => {
+        clearInterval(intervaloTiro);
+        macaco.html.removeChild(tiroEl);
+    }, 500);
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === ' ') {
+        atirar();
+    }
+});
+
+requestAnimationFrame(atualizarPosicao);
