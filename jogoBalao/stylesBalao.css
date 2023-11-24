@@ -5,3 +5,18 @@
     height: 100px;
     border-radius: 50%;
 }
+
+.Robo {
+    position: absolute;
+    background-color: grey;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.tiro {
+    position: absolute;
+    background-color: aqua;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
