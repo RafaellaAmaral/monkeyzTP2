@@ -1,13 +1,13 @@
-body{
-    min-height: 90vh;
-    background-image: url('../macacoInvaderImg/background.png');
-    overflow: hidden;
+body {
+  min-height: 90vh;
+  background-image: url("./imagens/background.png");
+  overflow: hidden;
 }
-#macaco{
-    position: absolute;
-    width: 10%;
-    height: 20px;
-    background-color: black;
-    bottom: 10%;
-    transform: translate(-50%,-50%);
+#macaco {
+  position: absolute;
+  width: 10%;
+  height: 20px;
+  background-color: black;
+  bottom: 10%;
+  transform: translate(-50%, -50%);
 }
