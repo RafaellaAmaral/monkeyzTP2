@@ -1,31 +1,40 @@
-const macaco = document.getElementById("macaco");
-const planta = document.getElementById("planta");
+const dino = document.querySelector(".dino");
+const cacto = document.querySelector(".cacto");
+const score = document.querySelector(".score");
+let alreadyJump = false;
+let count = 0;
+
+document.addEventListener("keydown", (e) => {
+  if ((e.code === "ArrowUp") | (e.code === "Space")) {
+    jump();
+  }
+});
 
 function jump() {
-    if (macaco.classList != "jump") {
-        macaco.classList.add("jump");
+  if (!dino.classList.contains("jump")) {
+    dino.classList.add("jump");
+    alreadyJump = true;
 
-        setTimeout(function () {
-            macaco.classList.remove("jump");
-        }, 300);
-    }
+    setTimeout(() => {
+      dino.classList.remove("jump");
+      alreadyJump = false;
+    }, 1100);
+  }
 }
 
-let isAlive = setInterval(() => {
-    let randomTime = Math.random() * 6000; //criar planta de maneira aleatória
+setInterval(() => {
+  let dinoBottom = parseInt(
+    window.getComputedStyle(dino).getPropertyValue("bottom")
+  );
+  let cactoLeft = parseInt(
+    window.getComputedStyle(cacto).getPropertyValue("left")
+  );
 
-    let macacoTop = parseInt(window.getComputedStyle(macaco).getPropertyValue("top"));
+  if (cactoLeft > 40 && cactoLeft < 270 && dinoBottom <= 50 && !alreadyJump) {
+    alert(`Game Over! Seu score foi: ${count}`);
+    count = 0;
+  }
 
-    let plantaLeft = parseInt(window.getComputedStyle(planta).getPropertyValue("left"));
-
-    if (plantaLeft < 50 && plantaLeft > 0 && macacoTop >= 140){
-        alert("Vixe, game over :(");
-        document.body.innerHTML = '<h1 class="game-over""> Atualize a página e jogue novamente </h1>'; // criando título ao final do jogo
-    }
-
-    setTimeout(isAlive, randomTime);
+  count++;
+  score.innerHTML = `SCORE: ${count}`;
 }, 10);
-
-document.addEventListener("keydown", function (event) {
-    jump();
-});
