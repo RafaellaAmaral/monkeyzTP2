@@ -1,36 +1,35 @@
-const macaco = document.querySelector(".macaco");
-const cacto = document.querySelector(".barril");
+const macacoEl = document.querySelector(".macaco");
+const barrilEl= document.querySelector(".barril");
 const score = document.querySelector(".ponto");
 let alreadyJump = false;
 let count = 0;
 
-document.addEventListener("keydown", (e) => {
-  if ((e.code === "ArrowUp") | (e.code === "Space")) {
-    jump();
-  }
-});
-
 function jump() {
-  if (!macaco.classList.contains("jump")) {
-    macaco.classList.add("jump");
+  if (!macacoEl.classList.contains("jump")) {
+    macacoEl.classList.add("jump");
     alreadyJump = true;
 
     setTimeout(() => {
-      macaco.classList.remove("jump");
+      macacoEl.classList.remove("jump");
       alreadyJump = false;
-    }, 1200);
+    }, 1100);
   }
 }
 
+document.addEventListener("keydown", (e) => {
+    if ((e.code === "ArrowUp") | (e.code === "Space")) {
+      jump();
+    }
+  });
 setInterval(() => {
   let macacoBottom = parseInt(
-    window.getComputedStyle(macaco).getPropertyValue("bottom")
+    window.getComputedStyle(macacoEl).getPropertyValue("bottom")
   );
-  let macacoLeft = parseInt(
-    window.getComputedStyle(barril).getPropertyValue("left")
+  let barrilLeft = parseInt(
+    window.getComputedStyle(barrilEl).getPropertyValue("left")
   );
 
-  if (barrilLeft > 40 && barrilLeft < 270 && barrilBottom <= 50 && !alreadyJump) {
+  if (barrilLeft > 40 && barrilLeft < 270 && macacoBottom <= 50 && !alreadyJump) {
     alert(`Game Over! Seu score foi: ${count}`);
     count = 0;
   }
