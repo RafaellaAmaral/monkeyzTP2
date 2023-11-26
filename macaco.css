@@ -35,9 +35,10 @@
   
   .ponto {
     position: absolute;
-    top: 30px;
-    left: 0;
     font-size: x-large;
+    top: 35px;
+    left: 0;
+    
   }
   
   .macaco {
