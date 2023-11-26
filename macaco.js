@@ -1,6 +1,6 @@
-const dino = document.querySelector(".dino");
-const cacto = document.querySelector(".cacto");
-const score = document.querySelector(".score");
+const macaco = document.querySelector(".macaco");
+const cacto = document.querySelector(".barril");
+const score = document.querySelector(".ponto");
 let alreadyJump = false;
 let count = 0;
 
@@ -11,26 +11,26 @@ document.addEventListener("keydown", (e) => {
 });
 
 function jump() {
-  if (!dino.classList.contains("jump")) {
-    dino.classList.add("jump");
+  if (!macaco.classList.contains("jump")) {
+    macaco.classList.add("jump");
     alreadyJump = true;
 
     setTimeout(() => {
-      dino.classList.remove("jump");
+      macaco.classList.remove("jump");
       alreadyJump = false;
-    }, 1100);
+    }, 1200);
   }
 }
 
 setInterval(() => {
-  let dinoBottom = parseInt(
-    window.getComputedStyle(dino).getPropertyValue("bottom")
+  let macacoBottom = parseInt(
+    window.getComputedStyle(macaco).getPropertyValue("bottom")
   );
-  let cactoLeft = parseInt(
-    window.getComputedStyle(cacto).getPropertyValue("left")
+  let macacoLeft = parseInt(
+    window.getComputedStyle(barril).getPropertyValue("left")
   );
 
-  if (cactoLeft > 40 && cactoLeft < 270 && dinoBottom <= 50 && !alreadyJump) {
+  if (barrilLeft > 40 && barrilLeft < 270 && barrilBottom <= 50 && !alreadyJump) {
     alert(`Game Over! Seu score foi: ${count}`);
     count = 0;
   }
