@@ -1,6 +1,6 @@
-const macacoEl = document.querySelector(".macaco");
-const barrilEl= document.querySelector(".barril");
-const score = document.querySelector(".ponto");
+const macacoEl = document.querySelector("#macaco");
+const barrilEl= document.querySelector("#barril");
+const score = document.querySelector("#ponto");
 let alreadyJump = false;
 let count = 0;
 
