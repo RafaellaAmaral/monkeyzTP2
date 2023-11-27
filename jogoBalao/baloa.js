@@ -69,16 +69,17 @@ function atualizarPosicao() {
 function atirar() {
     let tiroEl = document.createElement('div');
     tiroEl.className = 'tiro';
-
-    tiroEl.style.top = (macaco.pos.y + (macaco.height / 2)) + 'px';
-    tiroEl.style.left = (macaco.pos.x + macaco.width) + 'px';
+    let direcaoTiro = new Vetor(macaco.vel.x, macaco.vel.y);
+    let velocidadeTiro = 15;
+    tiroEl.style.top = macaco.pos.y + 'px';
+    tiroEl.style.left = macaco.pos.x + 'px';
 
     macaco.html.appendChild(tiroEl);
 
 
-    let direcaoTiro = new Vetor(macaco.vel.x, macaco.vel.y);
-    let velocidadeTiro = 3;
-    
+
+|   
+
 
     let intervaloTiro = setInterval(() => {
         tiroEl.pos = tiroEl.pos || { x: parseFloat(tiroEl.style.left) || 0, y: parseFloat(tiroEl.style.top) || 0 };
@@ -88,7 +89,7 @@ function atirar() {
         tiroEl.style.top = tiroEl.pos.y + 'px';
     }, 20);
 
-    // Define um timeout para remover a div após 0.5 segundos
+
     setTimeout(() => {
         clearInterval(intervaloTiro);
         macaco.html.removeChild(tiroEl);
