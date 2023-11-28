@@ -5,9 +5,24 @@ body {
 }
 #macaco {
   position: absolute;
-  width: 10%;
-  height: 20px;
-  background-color: black;
-  bottom: 10%;
-  transform: translate(-50%, -50%);
+  top: 75%;
+  transform: translate(-50%, 0%);
+  z-index: 9;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(-0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.banana {
+  animation: spin 0.35s linear infinite;
+}
+
+.explosao {
+  height: 150px;
 }
