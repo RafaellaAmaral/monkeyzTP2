@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(92, 232, 218);
+    background-color: rgb(92, 183, 232);
 
   }
   
@@ -17,37 +17,37 @@
 .game{
         width: 600px;
         height: 300px;
-        background-image: url(/img/fundo.png);
+        background-image: url(img/fundo.png);
         background-repeat: repeat-x; 
-        animation: slideright 300s infinite linear; 
+        animation: slideleft 300s infinite linear; 
         margin: auto;
+        position: relative; 
     }
     
    
-    @keyframes slideright{ 
+    @keyframes slideleft{ 
         from {
-            background-position: 70000%;
-        } to {
             background-position: 0;
+        } to {
+            background-position: 70000%;
         }
     }
   
   
   #ponto {
     position: absolute;
-    font-size: x-large;
-    top: 35px;
+    top: 30px;
     left: 0;
-    
+    font-size: x-large;
   }
   
   #macaco {
     position: absolute;
     bottom: 0;
-    background-image: url(/img/macaco.jpg);
+    background-image: url(img/macaco.png);
     width: 280px;
     height: 130px;
-    background-size: 280px;
+    background-size: 100px;
     background-repeat: no-repeat;
     transform: scaleX(-1);
   }
@@ -55,12 +55,13 @@
   #barril {
     position: absolute;
     bottom: 0;
-    background-image: url(/img/barril.jpg);
-    width: 35px;
-    height: 70px;
-    background-size: 35px;
+    background-image: url(img/barril.png);
+    width: 75px;
+    height: 80px;
+    background-size: 75px 80px;
+    bottom: 30px;
     background-repeat: no-repeat;
-    animation: cacto 3s linear infinite;
+    animation: barril 3s linear infinite;
   }
   
   @keyframes barril {
@@ -72,6 +73,7 @@
     }
   }
   
+
   .jump {
     animation: jump 1.1s linear;
   }
@@ -95,5 +97,17 @@
   
     100% {
       bottom: 0;
+    }
+  }
+
+  @keyframes macacoAndandoAnimacao {
+    0% {
+      transform: rotate(5deg);
+    }
+    50% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(5deg);
     }
   }
