@@ -1,8 +1,10 @@
 let contador = 0;
-const clock = 75;
-const faseClock = 300;
-const macaco = $("#macaco");
+let clock = 75;
+let faseClock = 300;
 let bananaVel = 20;
+let explosaoTamanho = 150;
+const macaco = $("#macaco");
+const pontos= $("#pontos");
 const container = $("#containerJogo");
 
 $("body").on("mousemove", (e) => {
@@ -62,11 +64,11 @@ function isCollide(a, b) {
   b = $(b);
   return !(
     parseInt(a.css("top")) + parseInt(a.css("height")) <
-      parseInt(b.css("top")) ||
+    parseInt(b.css("top")) ||
     parseInt(a.css("top")) >
-      parseInt(b.css("top")) + parseInt(b.css("height")) ||
+    parseInt(b.css("top")) + parseInt(b.css("height")) ||
     parseInt(a.css("left")) + parseInt(a.css("width")) <
-      parseInt(b.css("left")) ||
+    parseInt(b.css("left")) ||
     parseInt(a.css("left")) > parseInt(b.css("left")) + parseInt(b.css("width"))
   );
 }
@@ -82,6 +84,7 @@ function explode(img) {
   );
   img.removeClass("robo");
   img.addClass("explosao");
+  img.css("height",`${explosaoTamanho}px`)
   setTimeout(() => {
     deleta(img);
   }, 1000);
@@ -105,7 +108,7 @@ function checaColisao() {
 
 function derrota(ele) {
   deleta(ele);
-  alert("perdestes");
+  alert("Você perdeu!!!");
   window.location.reload();
 }
 
@@ -117,12 +120,26 @@ function checarDerrota() {
   });
 }
 
+function atualizarPontos() {
+  pontos.html(`Score:${contador}`)
+}
+
+cheet("t p 2",()=>{
+  bananaVel=bananaVel*1,25;
+  explosaoTamanho=explosaoTamanho*2;
+  clock=clock/2;
+  faseClock=faseClock/2;
+  pontos.css("color","red");
+  setInterval(atualizarRobos, clock);
+})
+
 function atualizar() {
   atualizarRobos();
   criaRoboDeHorda();
   atualizarBananas();
   checaColisao();
   checarDerrota();
+  atualizarPontos();
   contador++;
 }
 
